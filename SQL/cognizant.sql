@@ -202,5 +202,24 @@ group by registration_date
 order by registration_date desc;
 
 -- 12
-select event_id,
+select event_id,count(session_id) as session_count
 from sessions
+group by event_id
+having count(session_id) = (
+    select Max(cnt) from
+    (select count(session_id) as cnt
+    from sessions
+    group by event_id
+    ) as subquery
+)
+
+-- 13
+select e.city,round(avg(f.rating),2) as avg_feedback_rating
+from events as e
+join feedback as f
+on e.event_id = f.event_id
+group by e.city
+order by avg_feedback_rating desc,e.city;
+
+-- 14
+
