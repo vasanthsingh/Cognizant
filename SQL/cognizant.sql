@@ -222,4 +222,89 @@ group by e.city
 order by avg_feedback_rating desc,e.city;
 
 -- 14
+select e.event_id,e.title,COUNT(registration_id) as registration_count
+from events as e
+left join Registrations as r
+on e.event_id = r.event_id
+group by e.event_id,e.title
+order by registration_count desc,e.event_id asc
+limit 3;
 
+-- 15
+select e1.event_id,e1.session_id as session_id_1,e1.title as session_title_1,e2.session_id as session_id_2,e2.title as session_title_2
+from sessions as e1
+join sessions as e2
+on e1.event_id = e2.event_id
+and e1.session_id_1 < e2.session_id_2
+where e1.start_time < e2.end_time and e1.end_time > e2.start_time
+order by event_id asc;
+
+
+
+-- 16
+select u.user_id,u.full_name,u.registration_date
+from users as u
+where registration_date >= date_sub('2025-06-20',interval 30 day)
+and u.user_id not in(select user_id from registrations)
+order by user_id asc;
+
+-- 17
+select speaker_name ,count(session_id) as session_count
+from sessions 
+group by speaker_name
+having session_count > 1
+order by session_count desc,speaker_name asc;
+
+--18
+select e.event_id,e.title 
+from events as e
+where event_id not in(select event_id from resources)
+order by e.event_id asc;
+
+--19 
+select e.event_id,e.title,count(select registration_id from registrations where e.event_id = event_id) as total_registrations,round(select avg(rating) from feedback where event_id = e.event_id,2) as avg_feedback_rating
+from events as e
+where e.status = 'completed'
+order by e.event_id asc;
+
+-- 20
+select u.user_id,u.full_name,ifnull((select count(registration_id) from registrations where user_id = u.user_id),0) as events_registered,
+ifnull((select count(feedback_id) from feedback where user_id = u.user_id),0)
+from users as u
+order by u.user_id asc;
+
+--21 
+select u.user_id,u.full_name,count(f.feedback_id) as feedback_count
+from users as u
+join feedback as f
+on u.user_id = f.user_id
+group by u.user_id,u.full_name
+order by feedback_count desc
+limit 5;
+
+-- 22
+select r.user_id,r.event_id,count(registration_id) as registration_count
+from registrations as r
+group by r.event_id,r.user_id
+having registration_count > 1
+order by r.user_id asc;
+
+--23
+select date_format(registration_date,"%Y-%m") as registration_month,count(registration_id) as month_registration_count
+from registrations
+group by date_format(registration_date,"%Y-%M")
+order by registration_month asc;
+
+-- 24
+select e.event_id,e.title,round(avg(timestampdiff(MINUTE,start_time,end_time)),2) as  avg_session_duration_minutes
+from events as e
+join sessions as s
+on e.event_id = s.event_id
+group by e.event_id,e.title
+order by avg_session_duration_minutes desc,e.event_id ASC;
+
+-- 25
+select e.event_id,e.title
+from events as e
+where event_id NOT IN(select event_id from sessions)
+order by e.event_id
