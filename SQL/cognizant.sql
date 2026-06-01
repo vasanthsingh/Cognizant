@@ -211,7 +211,7 @@ having count(session_id) = (
     from sessions
     group by event_id
     ) as subquery
-)
+);
 
 -- 13
 select e.city,round(avg(f.rating),2) as avg_feedback_rating
@@ -240,7 +240,6 @@ where e1.start_time < e2.end_time and e1.end_time > e2.start_time
 order by event_id asc;
 
 
-
 -- 16
 select u.user_id,u.full_name,u.registration_date
 from users as u
@@ -255,13 +254,13 @@ group by speaker_name
 having session_count > 1
 order by session_count desc,speaker_name asc;
 
---18
+-- 18
 select e.event_id,e.title 
 from events as e
 where event_id not in(select event_id from resources)
 order by e.event_id asc;
 
---19 
+-- 19 
 select e.event_id,e.title,count(select registration_id from registrations where e.event_id = event_id) as total_registrations,round(select avg(rating) from feedback where event_id = e.event_id,2) as avg_feedback_rating
 from events as e
 where e.status = 'completed'
@@ -273,7 +272,7 @@ ifnull((select count(feedback_id) from feedback where user_id = u.user_id),0)
 from users as u
 order by u.user_id asc;
 
---21 
+-- 21 
 select u.user_id,u.full_name,count(f.feedback_id) as feedback_count
 from users as u
 join feedback as f
@@ -289,7 +288,7 @@ group by r.event_id,r.user_id
 having registration_count > 1
 order by r.user_id asc;
 
---23
+-- 23
 select date_format(registration_date,"%Y-%m") as registration_month,count(registration_id) as month_registration_count
 from registrations
 group by date_format(registration_date,"%Y-%M")
