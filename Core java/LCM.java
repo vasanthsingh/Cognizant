@@ -5,7 +5,13 @@ public class LCM{
         int a=sc.nextInt();
         int b=sc.nextInt();
         int aa=Math.abs(a),bb=Math.abs(b);
-        int g=aa;int y=bb;while(y!=0){int t=y;y=g%y;g=t;}
+        int g=aa;
+        int y=bb;
+        while(y!=0){
+            int t=y;
+            y=g%y;
+            g=t;
+        }
         long l=(long)aa/ g * bb;
         System.out.println(l);
         sc.close();
