@@ -1,0 +1,7 @@
+/* Placeholder bootstrap.min.css
+   Replace this file with the real Bootstrap CSS from
+   node_modules/bootstrap/dist/css/bootstrap.min.css
+*/
+body{padding:20px;font-family:Segoe UI,Arial,sans-serif}
+.navbar{padding:.5rem 1rem}
+.btn{padding:.5rem 1rem;border-radius:.375rem}

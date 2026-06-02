@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercise 9 — Buttons</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container py-4">
+  <h1>Buttons</h1>
+  <div class="mb-3">
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-secondary">Secondary</button>
+    <button class="btn btn-outline-primary">Outline</button>
+    <button class="btn btn-danger">Danger</button>
+  </div>
+  <h2>Button group & toggle</h2>
+  <div class="btn-group mb-3" role="group">
+    <button class="btn btn-outline-secondary">Left</button>
+    <button class="btn btn-outline-secondary">Middle</button>
+    <button class="btn btn-outline-secondary">Right</button>
+  </div>
+  <div class="btn-group" role="group" aria-label="Toggle buttons">
+    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btncheck1">Toggle 1</label>
+
+    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btncheck2">Toggle 2</label>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
