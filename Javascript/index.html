@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Community Event Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f7fb;
+      color: #222;
+    }
+    header, main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    header {
+      background: #1f4e79;
+      color: white;
+    }
+    .panel {
+      background: white;
+      border: 1px solid #d9e2ec;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    button {
+      border: none;
+      background: #1f4e79;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    button.secondary {
+      background: #51606f;
+    }
+    button.small {
+      width: auto;
+      padding: 8px 12px;
+      margin-right: 8px;
+      margin-top: 8px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #d9e2ec;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .muted {
+      color: #667085;
+      font-size: 14px;
+    }
+    .hidden {
+      display: none;
+    }
+    .status {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .error-text {
+      color: #b42318;
+      font-size: 13px;
+      min-height: 16px;
+      margin-top: 4px;
+    }
+    .success-text {
+      color: #027a48;
+    }
+    .message-box {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Local Community Event Portal</h1>
+    <p>Simple community events page for filtering, registration, and basic JavaScript practice.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Search and Filters</h2>
+      <div class="grid">
+        <div>
+          <label for="categoryFilter">Category</label>
+          <select id="categoryFilter">
+            <option value="all">All</option>
+            <option value="music">Music</option>
+            <option value="workshop">Workshop</option>
+            <option value="sports">Sports</option>
+            <option value="charity">Charity</option>
+          </select>
+        </div>
+        <div>
+          <label for="locationFilter">Location</label>
+          <input id="locationFilter" type="text" placeholder="Enter location">
+        </div>
+        <div>
+          <label for="searchBox">Quick Search</label>
+          <input id="searchBox" type="text" placeholder="Search by event name">
+        </div>
+      </div>
+      <p id="loadingText" class="muted hidden">Loading event data...</p>
+      <button id="loadPromiseBtn" class="small">Load with then/catch</button>
+      <button id="loadAsyncBtn" class="small secondary">Load with async/await</button>
+      <button id="showMusicBtn" class="small secondary">Show Music Events</button>
+    </section>
+
+    <section class="panel">
+      <h2>Add New Event</h2>
+      <div class="grid">
+        <div><label for="eventName">Event Name</label><input id="eventName" type="text"></div>
+        <div><label for="eventDate">Date</label><input id="eventDate" type="date"></div>
+        <div><label for="eventCategory">Category</label><input id="eventCategory" type="text" placeholder="music, workshop..."></div>
+        <div><label for="eventLocation">Location</label><input id="eventLocation" type="text"></div>
+        <div><label for="eventSeats">Seats</label><input id="eventSeats" type="number" min="1"></div>
+      </div>
+      <button id="addEventBtn" class="small">Add Event</button>
+    </section>
+
+    <section class="panel">
+      <h2>Event Registration Form</h2>
+      <form id="registrationForm">
+        <div class="grid">
+          <div>
+            <label for="fullName">Name</label>
+            <input id="fullName" name="fullName" type="text" placeholder="Enter your name">
+            <div id="fullNameError" class="error-text"></div>
+          </div>
+          <div>
+            <label for="emailAddress">Email</label>
+            <input id="emailAddress" name="emailAddress" type="email" placeholder="Enter your email">
+            <div id="emailAddressError" class="error-text"></div>
+          </div>
+          <div>
+            <label for="selectedEvent">Select Event</label>
+            <select id="selectedEvent" name="selectedEvent"></select>
+            <div id="selectedEventError" class="error-text"></div>
+          </div>
+        </div>
+        <button id="registerBtn" type="submit" class="small">Register</button>
+      </form>
+      <div id="registrationMessage" class="message-box muted"></div>
+      <p class="muted">If this portal grows later, React or Vue would make reusable event cards and form state easier to manage.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Upcoming Events</h2>
+      <button id="toggleCardsBtn" class="small secondary">Toggle Event Cards</button>
+      <div id="eventList" class="cards"></div>
+      <p id="emptyMessage" class="muted hidden">No valid upcoming events with seats are available right now.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Category Summary</h2>
+      <div id="summaryBox" class="muted">Pick a category and register to see totals.</div>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

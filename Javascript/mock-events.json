@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Neighborhood Cleanup",
+    "date": "2026-09-15",
+    "category": "charity",
+    "location": "Riverside Park",
+    "seats": 15
+  },
+  {
+    "name": "Yoga in the Park",
+    "date": "2026-10-01",
+    "category": "sports",
+    "location": "Central Park",
+    "seats": 18
+  }
+]
