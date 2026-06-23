@@ -1,0 +1,20 @@
+CREATE TABLE AuditLog(
+    LogID NUMBER GENERATED ALWAYS AS IDENTITY,
+    TransactionID NUMBER,
+    LogDate DATE
+);
+
+CREATE OR REPLACE TRIGGER LogTransaction
+AFTER INSERT ON Transactions
+FOR EACH ROW
+BEGIN
+    INSERT INTO AuditLog(
+        TransactionID,
+        LogDate
+    )
+    VALUES(
+        :NEW.TransactionID,
+        SYSDATE
+    );
+END;
+/
