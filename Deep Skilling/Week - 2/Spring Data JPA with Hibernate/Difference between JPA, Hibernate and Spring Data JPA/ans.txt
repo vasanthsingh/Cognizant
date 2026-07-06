@@ -1,0 +1,33 @@
+# Difference Between JPA, Hibernate, and Spring Data JPA
+
+## JPA (Java Persistence API)
+
+JPA (Java Persistence API) is a specification that defines a standard set of rules for mapping Java objects to database tables. It provides interfaces and annotations such as `@Entity`, `@Id`, and `@Table`, but it does not contain the actual implementation. Since JPA is only a specification, it requires an implementation like Hibernate to perform database operations.
+
+## Hibernate
+
+Hibernate is an Object Relational Mapping (ORM) framework and the most popular implementation of JPA. It follows the rules defined by JPA and provides the actual functionality required to interact with the database. Hibernate offers features such as `Session`, `SessionFactory`, HQL (Hibernate Query Language), caching, lazy loading, and automatic table creation. It converts Java objects into database records and vice versa.
+
+## Spring Data JPA
+
+Spring Data JPA is a Spring Framework module built on top of JPA. It simplifies database access by eliminating the need to write most of the boilerplate code. Instead of creating DAO classes and writing SQL or HQL queries for common operations, developers can simply create repository interfaces by extending `JpaRepository`. Spring Data JPA internally uses JPA, and JPA is typically implemented using Hibernate.
+
+## Relationship Between Them
+
+- **JPA** defines the standard rules for Object Relational Mapping (ORM).
+- **Hibernate** is the implementation of those JPA rules.
+- **Spring Data JPA** is a higher-level abstraction that uses JPA (usually implemented by Hibernate) to simplify database operations.
+
+## Real-Time Analogy
+
+Imagine driving a car:
+
+- **JPA** is like the traffic rules that define how driving should be done.
+- **Hibernate** is the actual car that follows those rules and performs the driving.
+- **Spring Data JPA** is like a self-driving car that automatically handles most of the driving for you while still following the same traffic rules.
+
+## Simple Summary
+
+- **JPA = Specification (Rules)**
+- **Hibernate = Implementation (Engine that follows the rules)**
+- **Spring Data JPA = Simplified framework built on top of JPA that reduces coding effort**
